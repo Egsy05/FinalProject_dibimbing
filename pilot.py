@@ -45,7 +45,7 @@ if st.button('Search'):
             st.dataframe(filtered_df)
         else:
             st.write('No results found.')
-
+st.write("You can click search to display all games!")
 st.subheader("Highest user games!", divider='blue')
 
 x = data.groupby(['Name']).agg(users=('Peak CCU','sum')).sort_values('users',ascending=False).head(10).reset_index()
