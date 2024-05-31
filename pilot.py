@@ -31,6 +31,7 @@ data_url = st.markdown("[Source data!](https://www.kaggle.com/datasets/mexwell/s
 data = pd.read_csv('games_cluster.csv')
 
 name_to_search = st.text_input('Search your game here:')
+st.write("You can click search to display all games!")
 if st.button('Search'):
     # If the input name_to_search is empty, show the original DataFrame
     if name_to_search.strip() == '':
@@ -45,7 +46,7 @@ if st.button('Search'):
             st.dataframe(filtered_df)
         else:
             st.write('No results found.')
-st.write("You can click search to display all games!")
+
 st.subheader("Highest user games!", divider='blue')
 
 x = data.groupby(['Name']).agg(users=('Peak CCU','sum')).sort_values('users',ascending=False).head(10).reset_index()
