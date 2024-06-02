@@ -1,7 +1,5 @@
 
 pip install git+https://github.com/Egsy05/streamlit-option-menu/tree/master
-
-pip install streamlit_option_menu
 import streamlit as st
 import pandas as pd
 import altair as alt
