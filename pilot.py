@@ -17,16 +17,12 @@ from streamlit.components.v1 import html
 # """, unsafe_allow_html=True)
 #this only for removing part in web that we didn't want to
 
-st.set_page_config(
-         Page_title = "Final_project_dibimbing"
-)
 st.balloons()
 st.title("Welcome! "
          "Here is my analysis about the steam games, "
          "from 2008 to 2023")
 st.markdown("Did **YOU** know, that there are over **70.000** games in steam!")
 st.header("About the Data")
-st.sidebar.success("Select a page above")
 
 st.write("Our data has been engineered to become easy to read and understand, "
         "you click this link below to lookup to the original data.")
