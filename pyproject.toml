@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "segmentation"
+version = "0.1.0"
+description = "project"
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11.5"
+streamlit = "^1.35.0"
+pandas = "^2.2.2"
+altair = "^5.3.0"
+streamlit-option-menu = "^0.3.13"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
