@@ -683,7 +683,6 @@ elif selected == "Find":
             similar_game = data1[data1['clusters'].isin(grab_cluster)].reset_index()
     
             ### Reco system
-            similar_game["Content"] = similar_game['Genres']
             tfidf = TfidfVectorizer(min_df = 3,
                             stop_words='english',
                             max_features=None,
@@ -691,9 +690,9 @@ elif selected == "Find":
                             analyzer='word',
                             token_pattern=r'\w{1,}',
                             ngram_range=(1,3))
-            similar_game["Content"] = similar_game["Content"].fillna(" ")
+            similar_game["Genres"] = similar_game["Genres"].fillna(" ")
 
-            tfidf_matrix = tfidf.fit_transform(similar_game['Content'])
+            tfidf_matrix = tfidf.fit_transform(similar_game['Genres'])
 
             sig = sigmoid_kernel(tfidf_matrix, tfidf_matrix)
             indices = pd.Series(similar_game.index, index=similar_game["Name"])
