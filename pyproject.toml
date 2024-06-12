@@ -1,13 +1,13 @@
 [tool.poetry]
-name = "segmentation"
+name = "segmentation env"
 version = "0.1.0"
-description = "project"
-authors = ["Your Name <you@example.com>"]
+description = "untuk segmentation dan recommendation system"
+authors = ["delun"]
 license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "3.11.5"
+python = "^3.10"
 streamlit = "^1.35.0"
 pandas = "^2.2.2"
 altair = "^5.3.0"
