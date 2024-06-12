@@ -683,7 +683,7 @@ elif selected == "Find":
             similar_game = data1[data1['clusters'].isin(grab_cluster)].reset_index()
     
             ### Reco system
-            similar_game["Content"] = similar_game['Genres']+
+            similar_game["Content"] = similar_game['Genres']
             tfidf = TfidfVectorizer(min_df = 3,
                             stop_words='english',
                             max_features=None,
