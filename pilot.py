@@ -668,12 +668,12 @@ elif selected == "Find":
 
         # st.scatter_chart(filter_table, x='Positive_Negative_dif', y='Peak CCU', color='Name',size='days_since_release')
     
-    if customer_type == "Recommended":
+    elif customer_type == "Recommended":
         data = pd.read_csv("genres.csv")
         data1 = pd.read_csv("games_.csv")
         data1['Genres'] = data['Genres']
         # data1['About the game'] = data['About the game']
-        data1 = data1[data1["Estimate users"]>=5000].reset_index()
+        # data1 = data1[data1["Estimate users"]>=5000].reset_index()
 
         st.header("Let the Machine Decide!", divider='blue')
         data_game = data1.Name.unique()
