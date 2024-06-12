@@ -669,9 +669,10 @@ elif selected == "Find":
         # st.scatter_chart(filter_table, x='Positive_Negative_dif', y='Peak CCU', color='Name',size='days_since_release')
     
     elif customer_type == "Recommended":
-        data = pd.read_csv("genres.csv")
+        data = pd.read_csv("Genres_Tags.csv")
         data1 = pd.read_csv("games_.csv")
         data1['Genres'] = data['Genres']
+        data1['Tags'] = data['Tags']
         data1 = data1[data1["Estimate users"]>=5000].reset_index()
 
         st.header("Let the Machine Decide!", divider='blue')
@@ -683,15 +684,17 @@ elif selected == "Find":
             similar_game = data1[data1['clusters'].isin(grab_cluster)].reset_index()
     
             ### Reco system
+            similar_game['Content'] = similar_game['Genres']+' '+similar_game['Tags']
             tfidf = TfidfVectorizer(min_df = 3,
-                            max_features=None,
-                            strip_accents='unicode',
-                            analyzer='word',
-                            token_pattern=r'\w{1,}',
-                            ngram_range=(1,3))
-            similar_game["Genres"] = similar_game["Genres"].fillna(" ")
+                                    stop_words='english',
+                                    max_features=None,
+                                    strip_accents='unicode',
+                                    analyzer='word',
+                                    token_pattern=r'\w{1,}',
+                                    ngram_range=(1,3))
+            similar_game['Content'] = similar_game['Content'].fillna(" ")
 
-            tfidf_matrix = tfidf.fit_transform(similar_game['Genres'])
+            tfidf_matrix = tfidf.fit_transform(similar_game['Content'])
 
             sig = sigmoid_kernel(tfidf_matrix, tfidf_matrix)
             indices = pd.Series(similar_game.index, index=similar_game["Name"])
