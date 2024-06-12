@@ -3,5 +3,3 @@ streamlit-option-menu==0.3.13
 altair==5.3.0
 pandasql==0.7.3
 
-scikit-learn-intelex==20230426.121932
-scipy==1.11.1
