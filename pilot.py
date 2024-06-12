@@ -672,7 +672,6 @@ elif selected == "Find":
         data = pd.read_csv("genres.csv")
         data1 = pd.read_csv("games_.csv")
         data1['Genres'] = data['Genres']
-        # data1['About the game'] = data['About the game']
         data1 = data1[data1["Estimate users"]>=5000].reset_index()
 
         st.header("Let the Machine Decide!", divider='blue')
