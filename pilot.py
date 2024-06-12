@@ -684,7 +684,6 @@ elif selected == "Find":
     
             ### Reco system
             tfidf = TfidfVectorizer(min_df = 3,
-                            stop_words='english',
                             max_features=None,
                             strip_accents='unicode',
                             analyzer='word',
