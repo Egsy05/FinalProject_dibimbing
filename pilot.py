@@ -650,7 +650,7 @@ elif selected == "Find":
         st.header("Welcome Players!", divider='blue')
         name_value = data['Name'].unique()
         select_game = st.selectbox("You can select your games here and we will find the games that are similar to your game",
-                                   name_value,index=None,placeholder= "Select your game here...")
+                                   name_value,index=0,placeholder= "Select your game here...")
         if select_game:
             filter_table = data[data['Name'].str.contains(select_game)]
             grab_cluster = filter_table['clusters'].unique()
@@ -666,7 +666,65 @@ elif selected == "Find":
             st.write("What is on your mind? ")
             st.write(filter_table)
 
-        # st.scatter_chart(filter_table, x='Positive_Negative_dif', y='Peak CCU', color='Name',size='days_since_release')
+        grab_games = show_filter['Name'].unique()
+        data3 = pd.read_csv("games_recommend_image_movies_website.csv")
+        data3 = data3.drop(columns="Recommendations")
+        pic_reco_game = data3[data3['Name'].isin(grab_games)].reset_index()
+        pic_reco_game = pic_reco_game.fillna("None")
+        pic_reco_game = pic_reco_game.drop_duplicates()
+        range_row = pic_reco_game['Name'].count()
+        
+        que = 1
+        i = 0
+        while que <= range_row:
+            col_1, col_2 = st.columns(2)
+            with col_1:
+                image_row1 = pic_reco_game.loc[i,"Header image"]
+                name_row1 = pic_reco_game.loc[i,"Name"]
+                genre_row1 = pic_reco_game.loc[i,"Genres"]
+                web_row1 = pic_reco_game.loc[i,"Website"]
+                movie_row1 = pic_reco_game.loc[i,"Movies"]
+                if image_row1=="None":
+                    st.write("No Image")
+                else:
+                    st.image(image_row1,use_column_width=True)
+            
+                if movie_row1=="None":
+                    st.write("No Video")
+                else:
+                    st.video(movie_row1)
+                st.write(f"Game Name : {name_row1}")
+                st.write(f"Genres : {genre_row1}")
+                st.write(f"Website : {web_row1}")
+            que+=1
+            i+=1
+            with col_2:
+                image_row2 = pic_reco_game.loc[i,"Header image"]
+                name_row2 = pic_reco_game.loc[i,"Name"]
+                genre_row2 = pic_reco_game.loc[i,"Genres"]
+                web_row2 = pic_reco_game.loc[i,"Website"]
+                movie_row2 = pic_reco_game.loc[i,"Movies"]
+                if image_row2=="None":
+                    st.write("No Image")
+                else:
+                    st.image(image_row2,use_column_width=True)
+            
+                if movie_row2=="None":
+                    st.write("No Video")
+                else:
+                    st.video(movie_row2)
+                st.write(f"Game Name : {name_row2}")
+                st.write(f"Genres : {genre_row2}")
+                st.write(f"Website : {web_row2}")
+            que+=1
+            i+=1
+
+
+
+
+
+
+    
     
     elif customer_type == "Recommended":
         data = pd.read_csv("Genres_Tags.csv")
