@@ -763,10 +763,74 @@ elif selected == "Find":
             sig_score=sig_score[1:11]
             games_indices = [i[0] for i in sig_score]
             st.write("This Could be your potential games!")
-            st.write(similar_game['Name'].iloc[games_indices])
+            reco_sys_result = similar_game['Name'].iloc[games_indices]
+            reco_sys_result_ = similar_game['Name'].iloc[games_indices].reset_index()
+            grab_reco_name = reco_sys_result_['Name'].unique()
+            reco_result = data1[data1['Name'].isin(grab_reco_name)].drop(columns="index")
+            st.write(reco_result)
             ###
         else:
             st.write("Please Select Game")
+
+        data3 = pd.read_csv("games_recommend_image_movies_website.csv")
+        data3 = data3.drop(columns="Recommendations")
+        pic_reco_game = data3[data3['Name'].isin(grab_reco_name)].reset_index()
+        pic_reco_game = pic_reco_game.fillna("None")
+        pic_reco_game = pic_reco_game.drop_duplicates()  
+        range_row = pic_reco_game['Name'].count()
+        que=1
+        i=0
+        while que < range_row:
+            col_1, col_2 = st.columns(2)
+            with col_1:
+                image_row1 = pic_reco_game.loc[i,"Header image"]
+                name_row1 = pic_reco_game.loc[i,"Name"]
+                genre_row1 = pic_reco_game.loc[i,"Genres"]
+                web_row1 = pic_reco_game.loc[i,"Website"]
+                movie_row1 = pic_reco_game.loc[i,"Movies"]
+                if image_row1=="None":
+                    st.write("No Image")
+                else:
+                    st.image(image_row1,use_column_width=True)
+            
+                if movie_row1=="None":
+                    st.write("No Video")
+                else:
+                    st.video(movie_row1)
+                st.write(f"Game Name : {name_row1}")
+                st.write(f"Genres : {genre_row1}")
+                st.write(f"Website : {web_row1}")
+            que+=1
+            i+=1
+            with col_2:
+                image_row2 = pic_reco_game.loc[i,"Header image"]
+                name_row2 = pic_reco_game.loc[i,"Name"]
+                genre_row2 = pic_reco_game.loc[i,"Genres"]
+                web_row2 = pic_reco_game.loc[i,"Website"]
+                movie_row2 = pic_reco_game.loc[i,"Movies"]
+                if image_row2=="None":
+                    st.write("No Image")
+                else:
+                    st.image(image_row2,use_column_width=True)
+            
+                if movie_row2=="None":
+                    st.write("No Video")
+                else:
+                    st.video(movie_row2)
+                st.write(f"Game Name : {name_row2}")
+                st.write(f"Genres : {genre_row2}")
+                st.write(f"Website : {web_row2}")
+            que+=1
+            i+=1
+
+        
+
+
+
+
+
+
+
 
 
 elif selected == 'Summary':
